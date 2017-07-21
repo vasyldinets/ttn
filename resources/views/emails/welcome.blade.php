@@ -1,0 +1,1 @@
+<a href="{{env('APP_URL')}}/password/reset/{{$token}}">Click to reset password</a>
