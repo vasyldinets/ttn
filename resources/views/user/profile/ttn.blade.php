@@ -26,6 +26,6 @@
                 @endforeach
             </table>
             <div class="text-center">
-                {{--{{$ttns->links()}}--}}
+                {{$ttns->links()}}
             </div>
 @endsection

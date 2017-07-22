@@ -14,15 +14,20 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                color: #fff;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
             }
-
+            body{
+                background-image: url('/img/bg.jpg');
+                -webkit-background-size: cover;
+                background-size: cover;
+            }
             .full-height {
                 height: 100vh;
+                background: rgba(0,0,0, 0.5);
             }
 
             .flex-center {
@@ -47,10 +52,14 @@
 
             .title {
                 font-size: 84px;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.68);
             }
-
+            h2{
+                text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            }
             .links > a {
-                color: #636b6f;
+                color: #fff;
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.68);
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -81,7 +90,7 @@
                 <div class="title m-b-md">
                     New word in the world of delivery
                 </div>
-                <h2>Do you want find your fucking TTN? <br>
+                <h2>Do you want find your TTN? <br>
                     @if(Auth::check())
                         <a href="/home/ttn/find" style="color: #ec2028">Click Here!</a>
                     @else

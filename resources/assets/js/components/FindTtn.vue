@@ -17,8 +17,11 @@
                 axios.post('/ttn/find', {'ttn_id':this.form.id}).then(function (response) {
                     if (response.data){
                         this.ttn = response.data;
-                        this.sender = response.data.sender.profile;
-                        this.recipient = response.data.recipient.profile;
+                        if(response.data.sender && response.data.recipient){
+                            this.sender = response.data.sender.profile;
+                            this.recipient = response.data.recipient.profile;
+                        }
+
                         if (response.data.track){
                             this.current_position = response.data.track.current_location.name;
                         } else {

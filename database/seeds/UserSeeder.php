@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'email' => 'vasyldinets@gmail.com',
-            'password' => bcrypt('HardRock0709'),
+            'password' => bcrypt('1'),
             'role' => 'user',
         ]);
         factory(App\User::class, 19)->create();

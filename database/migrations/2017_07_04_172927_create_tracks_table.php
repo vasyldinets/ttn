@@ -19,6 +19,7 @@ class CreateTracksTable extends Migration
             $table->integer('to_location_id');
             $table->integer('current_location_id');
             $table->integer('car_id');
+            $table->enum('status', ['active', 'done']);
             $table->timestamps();
         });
     }

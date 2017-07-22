@@ -14,7 +14,8 @@ class TrackController extends Controller
      */
     public function index()
     {
-        //
+        $tracks = Track::orderBy('status', 'ASC')->paginate(7);
+        return view('logist.track.index', compact('tracks'));
     }
 
     /**
@@ -24,7 +25,12 @@ class TrackController extends Controller
      */
     public function create()
     {
-        //
+        return view('logist.track.create');
+    }
+
+    public function find()
+    {
+        return view('logist.track.find');
     }
 
     /**
@@ -38,16 +44,6 @@ class TrackController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Track  $track
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Track $track)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -57,7 +53,7 @@ class TrackController extends Controller
      */
     public function edit(Track $track)
     {
-        //
+        return view('logist.track.edit', compact('track'));
     }
 
     /**
@@ -69,17 +65,13 @@ class TrackController extends Controller
      */
     public function update(Request $request, Track $track)
     {
-        //
+        $track->current_location_id = $request->input()['current_location'];
+        if ($track->to_location_id == $request->input()['current_location']){
+            $track->status = 'done';
+        }
+        if ($track->save()){
+            return $track;
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Track  $track
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Track $track)
-    {
-        //
-    }
 }

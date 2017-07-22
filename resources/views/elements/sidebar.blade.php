@@ -33,9 +33,11 @@
             @elseif(Auth::user()->role == 'operator')
                 <li><a href="/operator/ttn/find"><i class="fa fa-search"></i> <span>{{__('Find TTN')}}</span></a></li>
                 <li><a href="/operator/ttn/create"><i class="fa fa-plus"></i> <span>{{__('Create TTN')}}</span></a></li>
-                <li><a href="/operator/user/update"><i class="fa fa fa-user"></i> <span>{{__('Update User')}}</span></a></li>
+                <li><a href="/operator/user/profile"><i class="fa fa fa-user"></i> <span>{{__('Update User')}}</span></a></li>
             @elseif(Auth::user()->role == 'logist')
-
+                <li><a href="/logist/track"><i class="fa fa-list"></i> <span>{{__('All Tracks')}}</span></a></li>
+                <li><a href="/logist/track/create"><i class="fa fa-plus"></i> <span>{{__('Create Track')}}</span></a></li>
+                <li><a href="/logist/track/find"><i class="fa fa-search"></i> <span>{{__('Find Track')}}</span></a></li>
             @endif
             {{--<li class="treeview">--}}
                 {{--<a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>--}}

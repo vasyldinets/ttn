@@ -2546,6 +2546,7 @@ Vue.component('create-ttn', __webpack_require__(41));
 Vue.component('operator-create-ttn', __webpack_require__(43));
 Vue.component('find-ttn', __webpack_require__(45));
 Vue.component('update-profile', __webpack_require__(47));
+Vue.component('edit-track', __webpack_require__(59));
 
 var app = new Vue({
   el: '#app'
@@ -43731,8 +43732,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/ttn/find', { 'ttn_id': this.form.id }).then(function (response) {
                 if (response.data) {
                     this.ttn = response.data;
-                    this.sender = response.data.sender.profile;
-                    this.recipient = response.data.recipient.profile;
+                    if (response.data.sender && response.data.recipient) {
+                        this.sender = response.data.sender.profile;
+                        this.recipient = response.data.recipient.profile;
+                    }
+
                     if (response.data.track) {
                         this.current_position = response.data.track.current_location.name;
                     } else {
@@ -43847,6 +43851,100 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__(1)(
+  /* script */
+  __webpack_require__(60),
+  /* template */
+  null,
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "/home/dti/sites/ttn/resources/assets/js/components/logist/EditTrack.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e4289ea4", Component.options)
+  } else {
+    hotAPI.reload("data-v-e4289ea4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sweetalert2__);
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['track', 'to_location', 'from_location', 'current_location', 'car'],
+    data: function data() {
+        return {
+            form: {
+                current_location: this.current_location.id
+            },
+            locations: {},
+            status: this.track.status
+        };
+    },
+    methods: {
+        getLocation: function getLocation() {
+            axios.get('/locations/listall').then(function (response) {
+                this.locations = response.data;
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            });
+        },
+        saveTrack: function saveTrack() {
+            axios.post('/tracks/update/' + this.track.id, { 'current_location': this.form.current_location }).then(function (response) {
+                this.status = response.data.status;
+                console.log(response);
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('SAVED', 'Track updated success!', 'success');
+            }.bind(this)).catch(function (error) {
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('Error', 'Somthing wrong! Try again later.', 'error');
+                console.log(error);
+            });
+        }
+    },
+    mounted: function mounted() {
+        this.getLocation();
+    }
+});
 
 /***/ })
 /******/ ]);

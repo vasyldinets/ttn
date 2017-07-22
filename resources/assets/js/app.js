@@ -20,6 +20,7 @@ Vue.component('create-ttn', require('./components/user/CreateTtn.vue'));
 Vue.component('operator-create-ttn', require('./components/operator/OperatorCreateTtn.vue'));
 Vue.component('find-ttn', require('./components/FindTtn.vue'));
 Vue.component('update-profile', require('./components/operator/UpdateProfile.vue'));
+Vue.component('edit-track', require('./components/logist/EditTrack.vue'));
 
 const app = new Vue({
     el: '#app'

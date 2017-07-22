@@ -47,7 +47,26 @@ $factory->define(App\Ttn::class, function (Faker\Generator $faker) {
             'height' => ''.$faker->numberBetween(1,20),
             'depth' => ''.$faker->numberBetween(1,20),
             'price' => ''.$faker->numberBetween(1,20),
-            'status' => $faker->randomElement(['new','in_progress','completed']),
+            'track_id'=> $faker->numberBetween(1,20),
+            'status' => $faker->randomElement(['new','in_progress']),
+    ];
+});
+$factory->define(App\Track::class, function (Faker\Generator $faker) {
+
+    return [
+        'from_location_id' => $faker->numberBetween(1,20),
+        'to_location_id' => $faker->numberBetween(1,20),
+        'current_location_id' => $faker->numberBetween(1,20),
+        'car_id' => $faker->numberBetween(1,20),
+        'status' => 'active',
+    ];
+});
+$factory->define(App\Car::class, function (Faker\Generator $faker) {
+
+    return [
+        'car_number' => 'BI'.$faker->numberBetween(100000,999999),
+        'car_model' => $faker->randomElement(['GAZ','ZIL', 'Mersedes', 'Volvo', 'Scania']),
+        'carrying_capacity' => $faker->numberBetween(1,3),
     ];
 });
 

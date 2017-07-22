@@ -26,7 +26,7 @@ class TtnController extends Controller
 
     public function userTtn()
     {
-        $ttns= Auth::user()->ttn;
+        $ttns= Ttn::where(['user_id'=>Auth::user()->id])->paginate(7);
         return view('user.profile.ttn', compact('ttns'));
     }
     /**
@@ -265,37 +265,4 @@ class TtnController extends Controller
         return view('user.ttn.show', compact('ttn'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Ttn  $ttn
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ttn $ttn)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Ttn  $ttn
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Ttn $ttn)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Ttn  $ttn
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Ttn $ttn)
-    {
-        //
-    }
 }
