@@ -35,6 +35,24 @@
                 }.bind(this)).catch(function (errors) {
                     console.log(errors);
                 });
+            },
+            storeTrack: function () {
+                axios.post('/tracks/store', {'track':this.form}).then(function (response) {
+                    if (response.data.errors){
+                        this.errors = response.data.errors;
+                    } else {
+                        this.form.from = "";
+                        this.form.to = "";
+                        this.form.car = "";
+                        swal('SAVED', 'Track add success!', 'success');
+                        Event.$emit('addtrackresponse', response);
+                        this.getFromLocation();
+                        this.getFreeCars();
+                    }
+                }.bind(this)).catch(function (error) {
+                    console.log(error);
+                    swal('ERROR', 'Somtehing wrong! Try again later', 'error');
+                });
             }
         },
         mounted: function () {

@@ -275,7 +275,7 @@ class TtnController extends Controller
         $ttns = Ttn::where(['status'=> 'new'])->get();
         $from_locations = [];
         foreach ($ttns as $ttn){
-            if (!in_array($ttn->fromLocationn, $from_locations)){
+            if (!in_array($ttn->fromLocation, $from_locations)){
                 $from_locations[] = $ttn->fromLocation;
             }
         }

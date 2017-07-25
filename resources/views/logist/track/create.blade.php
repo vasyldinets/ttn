@@ -5,7 +5,7 @@
 
     <create-track inline-template>
         <div>
-            <form action="#" method="post" class="row">
+            <form action="#" method="post" class="row" @submit.prevent="storeTrack()">
                 <div class="form-group col-md-3">
                     <label for="from">{{__("Select from Location:")}}</label>
                     <select name="from" id="from" class="form-control" v-model="form.from" v-on:change="getToLocation()">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label for="car">{{__("Select Car:")}}</label>
-                    <select name="car" id="car" class="form-control">
+                    <select name="car" id="car" class="form-control" v-model="form.car">
                         <option value="" selected disabled>{{__('Select...')}}</option>
                         <option v-for="(car, key) in cars" :value="car.id">@{{ car.car_model }} - @{{ car.car_number }}</option>
                     </select>
@@ -80,4 +80,8 @@
             </div>
         </div>
     </list-track>
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.5/sweetalert2.min.css">
 @endsection

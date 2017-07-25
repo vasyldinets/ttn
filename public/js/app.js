@@ -43405,8 +43405,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.errors) {
                     this.errors = response.data.errors;
                 } else {
-                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('SAVED', 'Ttn add success!', 'success');
-                    this.ttn.user = false;
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('SAVED', 'TTN add success! Your TTN number ' + response.data.id, 'success');
+                    this.ttn.user = true;
                     this.ttn.user_id = "";
                     this.ttn.email = "";
                     this.ttn.name = "";
@@ -43635,7 +43635,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.errors) {
                     this.errors = response.data.errors;
                 } else {
-                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('SAVED', 'Ttn add success!', 'success');
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('SAVED', 'TTN add success! TTN number ' + response.data.id, 'success');
                     this.ttn.sender_user = true;
                     this.ttn.sender_user_id = "";
                     this.ttn.sender_email = "";
@@ -44097,7 +44097,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         Event.$on('addtrackresponse', function (response) {
-            this.tracks.data.unshift({});
+            this.tracks.data.unshift(response.data);
+            this.tracks.data.splice(-1, 1);
         }.bind(this));
     }
 });
@@ -44185,6 +44186,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.cars = response.data;
             }.bind(this)).catch(function (errors) {
                 console.log(errors);
+            });
+        },
+        storeTrack: function storeTrack() {
+            axios.post('/tracks/store', { 'track': this.form }).then(function (response) {
+                if (response.data.errors) {
+                    this.errors = response.data.errors;
+                } else {
+                    this.form.from = "";
+                    this.form.to = "";
+                    this.form.car = "";
+                    __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('SAVED', 'Track add success!', 'success');
+                    Event.$emit('addtrackresponse', response);
+                    this.getFromLocation();
+                    this.getFreeCars();
+                }
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+                __WEBPACK_IMPORTED_MODULE_0_sweetalert2___default()('ERROR', 'Somtehing wrong! Try again later', 'error');
             });
         }
     },

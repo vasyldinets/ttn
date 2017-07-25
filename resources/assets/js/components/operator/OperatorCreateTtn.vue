@@ -154,7 +154,7 @@
                     if (response.data.errors){
                         this.errors = response.data.errors;
                     } else {
-                        swal('SAVED', 'Ttn add success!', 'success');
+                        swal('SAVED', 'TTN add success! TTN number '+response.data.id, 'success');
                             this.ttn.sender_user=true;
                             this.ttn.sender_user_id="";
                             this.ttn.sender_email="";

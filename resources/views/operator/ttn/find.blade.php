@@ -26,14 +26,23 @@
                     <div class="col-sm-6">
                         <h3 class="text-center text-success">{{__('Sender Info')}}</h3>
                         <p><b>Name:</b> @{{ sender.name }} @{{ sender.middlename }} @{{ sender.lastname }}</p>
+                        <p><b>Email:</b> @{{ ttn.sender.email }}</p>
                         <p><b>Phone:</b> @{{ sender.phone }}</p>
                         <p><b>Passport ID:</b> @{{ sender.passport_id }}</p>
                     </div>
                     <div class="col-sm-6">
                         <h3 class="text-center text-success">{{__('Recipient Info')}}</h3>
                         <p><b>Name:</b> @{{ recipient.name }} @{{ recipient.middlename }} @{{ recipient.lastname }}</p>
+                        <p><b>Email:</b> @{{ ttn.recipient.email }}</p>
                         <p><b>Phone:</b> @{{ recipient.phone }}</p>
-                        <p><b>Passport ID:</b> @{{ recipient.passport_id }}</p>
+                        @if(Auth::user()->role == 'operator')
+                            <p v-if="recipient.passport_id"><b>Passport ID:</b> 
+                                @{{ recipient.passport_id }}
+                            </p>
+                            <p v-if="!recipient.passport_id"><b>Passport ID:</b>
+                                <a href="/operator/user/profile" class="btn btn-sm btn-success">{{__('Update')}}</a>
+                            </p>
+                        @endif
                     </div>
                 </div>
 

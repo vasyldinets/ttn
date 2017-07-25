@@ -35,11 +35,10 @@
         },
         created: function(){
             Event.$on('addtrackresponse', function(response){
-                this.tracks.data.unshift(
-                    {
-
-                    });
+                this.tracks.data.unshift(response.data);
+                this.tracks.data.splice(-1,1);
             }.bind(this));
+
         }
     }
 </script>

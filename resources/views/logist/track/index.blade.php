@@ -3,7 +3,7 @@
 @section('content')
             <h1>All Track</h1>
             <div class="pull-right">
-                <a href="/operator/track/create" class="btn btn-success btn-lg">Create new Track</a>
+                <a href="/logist/track/create" class="btn btn-success btn-lg">Create new Track</a>
             </div>
             <div class="clearfix"></div>
             <br>

@@ -68,6 +68,7 @@ Route::group(['prefix'=>'ttn'], function (){
 
 Route::group(['prefix'=>'tracks', 'middleware'=>'auth'], function (){
     Route::post('/update/{track}', 'TrackController@update');
+    Route::post('/store', 'TrackController@store');
     Route::get('/find/{track}', 'TrackController@findTrack');
     Route::get('/listall', 'TrackController@listall');
 

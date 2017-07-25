@@ -6,6 +6,9 @@ use App\Car;
 use App\Track;
 use App\Ttn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class TrackController extends Controller
 {
@@ -16,12 +19,12 @@ class TrackController extends Controller
      */
     public function index()
     {
-        $tracks = Track::orderBy('status', 'ASC')->paginate(7);
+        $tracks = Track::orderBy('id', 'DESC')->paginate(7);
         return view('logist.track.index', compact('tracks'));
     }
     public function listall()
     {
-        $tracks = Track::orderBy('status', 'ASC')
+        $tracks = Track::orderBy('id', 'DESC')
             ->with('car')
             ->with('toLocation')
             ->with('fromLocation')
@@ -53,7 +56,43 @@ class TrackController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->input()['track'];
+        $validator = Validator::make(Input::all()['track'],[
+            'from' => 'required|integer',
+            'to' => 'required|integer',
+            'car' => 'required|integer',
+        ]);
+        if ($validator->fails()) {
+            return Response::json(['errors' => $validator->getMessageBag()->toArray()], 200);
+        }
+
+        $track = Track::create([
+            'from_location_id' => $data['from'],
+            'to_location_id' => $data['to'],
+            'current_location_id' => $data['from'],
+            'car_id' => $data['car'],
+            'status' => 'active'
+        ]);
+
+
+//        Update car status & ttns
+        if ($track){
+            $ttns = [];
+            $ttns = Ttn::where(['from_location_id' => $data['from'], 'to_location_id' => $data['to'], 'status' => 'new'])->get();
+            foreach ($ttns as $ttn){
+                $ttn->track_id = $track->id;
+                $ttn->status = 'in_progress';
+                $ttn->save();
+            }
+
+            $car = Car::where(['id'=>$data['car']])->first();
+            $car->status = 'busy';
+            $car->save();
+        }
+        $track->fromLocation;
+        $track->toLocation;
+        $track->currentLocation;
+        return $track;
     }
 
 
