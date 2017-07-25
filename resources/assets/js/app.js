@@ -9,6 +9,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window.Event = new Vue();
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -21,6 +23,9 @@ Vue.component('operator-create-ttn', require('./components/operator/OperatorCrea
 Vue.component('find-ttn', require('./components/FindTtn.vue'));
 Vue.component('update-profile', require('./components/operator/UpdateProfile.vue'));
 Vue.component('edit-track', require('./components/logist/EditTrack.vue'));
+Vue.component('find-track', require('./components/logist/FindTrack.vue'));
+Vue.component('list-track', require('./components/logist/ListTrack.vue'));
+Vue.component('create-track', require('./components/logist/CreateTrack.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -23,13 +23,17 @@
             saveTrack: function () {
                 axios.post('/tracks/update/'+this.track.id, {'current_location':this.form.current_location}).then(function (response) {
                     this.status = response.data.status;
-                    console.log(response);
                     swal('SAVED', 'Track updated success!', 'success');
                 }.bind(this)).catch(function (error) {
                     swal('Error', 'Somthing wrong! Try again later.', 'error');
                     console.log(error);
                 });
             }
+        },
+        created: function(){
+            Event.$on('trackstatus', function(response){
+                this.status = response;
+            }.bind(this));
         },
         mounted: function () {
           this.getLocation();

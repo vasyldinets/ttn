@@ -19,6 +19,8 @@ class CreateTtnsTable extends Migration
             $table->integer('recipient_id');
             $table->integer('from_department_id');
             $table->integer('to_department_id');
+            $table->integer('from_location_id');
+            $table->integer('to_location_id');
             $table->integer('track_id')->nullable();
             $table->string('weight')->nullable();
             $table->string('width')->nullable();

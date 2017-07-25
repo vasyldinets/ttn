@@ -141,6 +141,8 @@ class TtnController extends Controller
                 'recipient_id' => $recipient_id,
                 'from_department_id' => $data['fromdepartment'],
                 'to_department_id' => $data['todepartment'],
+                'from_location_id' => $data['fromlocation'],
+                'to_location_id' => $data['tolocation'],
                 'weight' => $data['weight'],
                 'width' => $data['width'],
                 'height' => $data['height'],
@@ -242,6 +244,8 @@ class TtnController extends Controller
                 'recipient_id' => $recipient_id,
                 'from_department_id' => $data['fromdepartment'],
                 'to_department_id' => $data['todepartment'],
+                'from_location_id' => $data['fromlocation'],
+                'to_location_id' => $data['tolocation'],
                 'weight' => $data['weight'],
                 'width' => $data['width'],
                 'height' => $data['height'],
@@ -265,4 +269,27 @@ class TtnController extends Controller
         return view('user.ttn.show', compact('ttn'));
     }
 
+
+//    Select from location for track
+    public function cargoFrom(){
+        $ttns = Ttn::where(['status'=> 'new'])->get();
+        $from_locations = [];
+        foreach ($ttns as $ttn){
+            if (!in_array($ttn->fromLocationn, $from_locations)){
+                $from_locations[] = $ttn->fromLocation;
+            }
+        }
+        return $from_locations;
+    }
+    public function cargoTo($from_id){
+        $ttns = Ttn::where(['status'=> 'new', 'from_location_id'=>$from_id])->get();
+        $to_locations = [];
+        foreach ($ttns as $ttn){
+            if (!in_array($ttn->toLocation, $to_locations)){
+                $to_locations[] = $ttn->toLocation;
+            }
+        }
+
+        return $to_locations;
+    }
 }

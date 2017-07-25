@@ -18,6 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('car_number');
             $table->string('car_model');
             $table->string('carrying_capacity');
+            $table->enum('status', ['free', 'busy']);
             $table->timestamps();
         });
     }

@@ -82,4 +82,10 @@ class CarController extends Controller
     {
         //
     }
+
+//    Find free car for track
+    public  function listall(){
+        $cars = Car::where(['status'=>'free'])->get();
+        return $cars;
+    }
 }

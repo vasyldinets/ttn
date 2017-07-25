@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-push-2">
-        <h1>Edit Track</h1>
+        <h1>{{__('Edit Track')}}</h1>
 
         <edit-track :track="{{$track}}" :to_location="{{$track->toLocation}}" :from_location="{{$track->fromLocation}}" :current_location="{{$track->currentLocation}}" :car="{{$track->car}}" inline-template>
             <div>
